@@ -6,12 +6,7 @@ import UserModel from '../models/user.js';
 
 export const register = async (req, res) => {
     try {
-        //отправляем пост-запрос, если проходит проверка через registerValidation, то идем дальше
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) { //Если (массив с ошибками не пустой)
-            return res.status(400).json(errors.array());
-        }
-
+        
         const password = req.body.password;
         const salt = await bcrypt.genSalt(10); //шифруем пароль в 10 символах
         const hash = await bcrypt.hash(password, salt);
